@@ -425,7 +425,7 @@ subprojects {
   plugins.withType(ScalaPlugin) {
 
     scala {
-      zincVersion = versions.zinc
+      zincVersion = versions.zinc // due to a Gradle bug, this version is ignored when resolving compiler-interface.jar
     }
 
     task scaladocJar(type:Jar) {
@@ -465,7 +465,9 @@ subprojects {
       "-Xlint:private-shadow",
       "-Xlint:stars-align",
       "-Xlint:type-parameter-shadow",
-      "-Xlint:unused"
+      "-Xlint:unused",
+      "-release", "9",
+      "-Ydebug"
     ]
 
     // Inline more aggressively when compiling the `core` jar since it's not meant to be used as a library.
@@ -495,7 +497,7 @@ subprojects {
 
     configure(scalaCompileOptions.forkOptions) {
       memoryMaximumSize = '1g'
-      jvmArgs = ['-Xss4m']
+      jvmArgs = ['-Xss4m', '-Xlog:class*=debug:file=/tmp/class.txt']
     }
   }
 

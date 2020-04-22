@@ -115,7 +115,7 @@ versions += [
   spotbugsPlugin: "4.0.5",
   spotlessPlugin: "3.28.1",
   testRetryPlugin: "1.1.5",
-  zinc: "1.3.5",
+  zinc: "1.3.5", // Due to a Gradle bug, Gradle ignores the value when resolving compiler-interface.jar.
   zookeeper: "3.5.7",
   zstd: "1.4.4-7"
 ]
